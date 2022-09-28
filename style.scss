@@ -1,0 +1,1200 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+@mixin flexCenter() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-size: 26px;
+  font-weight: 500;
+  padding-bottom: 14px;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: 500;
+  color: white;
+  line-height: 1.2em;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.3em;
+  text-align: center;
+}
+
+h5 {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.3em;
+}
+
+h6 {
+  font-size: 28px;
+  font-weight: 500;
+  padding: 16px 0;
+}
+
+span {
+  font-weight: 300;
+}
+
+body {
+  background-color: #f7f6f5;
+  @include flexCenter();
+  flex-direction: column;
+  margin: 50px 50px 30px 50px;
+
+  #modal-background {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 200;
+    top: 0;
+    left: 0;
+    display: none;
+  }
+}
+
+/*HEADER*/
+header {
+  width: 100%;
+  border-bottom: 1px solid black;
+}
+
+/*TABS*/
+.tabs {
+  width: 100%;
+  height: 110px;
+  @include flexCenter();
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-right: 0;
+
+  .tab {
+    width: 250px;
+    height: 50px;
+    cursor: pointer;
+    @include flexCenter();
+    background-color: #999999;
+    border-radius: 18px 18px 0 0;
+    margin: 0 15px;
+  }
+
+  i {
+    color: white;
+    margin-right: 12px;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+/*SEARCH CONTAINER*/
+.search-container {
+  width: 100%;
+  height: 100vh;
+  background-image: url(images/pexels-daria-shevtsova-1095550.jpg);
+  background-repeat: none;
+  background-size: cover;
+  background-position: top;
+
+  .dark-overlay {
+    width: 100%;
+    height: 100vh;
+    @include flexCenter();
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: rgba(51, 51, 51, 0.1);
+  }
+
+  .recipe-search-container {
+    width: 100%;
+    @include flexCenter();
+    margin-top: 140px;
+
+    .searchBox {
+      @include flexCenter();
+    }
+
+    input {
+      width: 600px;
+      height: 60px;
+      font-size: 24px;
+      border: 3px solid #49b22b;
+      border-radius: 8px;
+      margin-right: 10px;
+      padding: 18px;
+    }
+
+    input::placeholder {
+      font-size: 24px;
+    }
+
+    button {
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      background-color: #49b22b;
+      border: none;
+      border-radius: 50%;
+
+      &:hover {
+        background-color: #2e8915;
+      }
+    }
+
+    .fa-search {
+      font-size: 24px;
+      color: white;
+    }
+  }
+
+  #results-container {
+    width: 85%;
+    height: 950px;
+    @include flexCenter();
+    justify-content: flex-start;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 12px;
+    margin-top: 70px;
+    margin-bottom: 35px;
+    padding: 75px;
+    overflow: scroll;
+    display: none;
+
+    #results-title {
+      margin-bottom: 50px;
+    }
+
+    #resultsGrid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: auto;
+      gap: 50px;
+    }
+
+    .meal-item {
+      height: auto;
+      @include flexCenter();
+      flex-direction: column;
+      justify-content: flex-start;
+      background-color: #f7f6f5;
+      filter: drop-shadow(1px 1px 2px rgb(190, 189, 189));
+    }
+
+    .meal-name {
+      width: 100%;
+      height: auto;
+      @include flexCenter();
+      flex-direction: column;
+      padding: 12px 20px;
+    }
+
+    .meal-img {
+      width: 100%;
+      height: 175px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .clickDiv {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      cursor: pointer;
+      opacity: 0;
+    }
+  }
+}
+
+/*SAVED CONTAINER*/
+.saved-container {
+  height: 100vh;
+  width: 100%;
+  background-color: white;
+  @include flexCenter();
+  align-items: flex-start;
+  display: none;
+
+  .saved-recipes {
+    background-color: white;
+    padding: 100px;
+
+    #emptyStateTextSaved {
+      font-size: 16px;
+      font-style: italic;
+      color: #999999;
+      margin-top: 40px;
+      padding: 0 30px;
+    }
+
+    #savedGrid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: auto;
+      gap: 35px;
+    }
+
+    #results-title {
+      margin-bottom: 50px;
+    }
+
+    .meal-item {
+      height: auto;
+      @include flexCenter();
+      flex-direction: column;
+      justify-content: flex-start;
+      background-color: #f7f6f5;
+      filter: drop-shadow(1px 1px 2px rgb(190, 189, 189));
+    }
+
+    .meal-name {
+      width: 100%;
+      height: auto;
+      @include flexCenter();
+      flex-direction: column;
+      padding: 12px 20px;
+    }
+
+    .meal-img {
+      width: 100%;
+      height: 175px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .clickDiv {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      cursor: pointer;
+      opacity: 0;
+    }
+  }
+}
+
+/*MEALPLAN CONTAINER*/
+.mealplan-container {
+  width: 100%;
+  height: 100vh;
+  @include flexCenter();
+  align-items: flex-start;
+  background-color: white;
+  padding: 80px;
+  display: none;
+
+  .cook-meals {
+    width: 50%;
+    max-width: 1200px;
+    height: 500px;
+    margin-right: 60px;
+
+    .totalMeals-title {
+      border-bottom: 1px solid #49b22b;
+    }
+
+    .total-meals {
+      font-weight: 500;
+      color: #49b22b;
+    }
+
+    .mealplan-meals {
+      width: auto;
+      height: auto;
+      @include flexCenter();
+      align-items: flex-start;
+      flex-wrap: wrap;
+      padding: 40px 0;
+      gap: 40px;
+
+      #emptyStateTextMealplan {
+        font-size: 16px;
+        font-style: italic;
+        color: #999999;
+        margin-top: 40px;
+        padding: 0 30px;
+      }
+
+      #mealplanGrid {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: auto;
+        gap: 25px;
+      }
+
+      .clickDiv {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        cursor: pointer;
+        opacity: 0;
+      }
+    }
+
+    .mealplan-stats {
+      @include flexCenter();
+      border-top: 1px solid #49b22b;
+      flex-direction: column;
+      align-items: flex-start;
+      padding-top: 15px;
+
+      .servings-container {
+        width: 100%;
+        padding-bottom: 15px;
+      }
+
+      .time-container {
+        width: 100%;
+        margin-left: 0px;
+        padding-top: 15px;
+        border-top: 1px solid rgb(202, 201, 201);
+      }
+
+      .total-time,
+      .total-servings {
+        font-weight: 600;
+      }
+    }
+  }
+
+  .shoppingList-container {
+    width: 50%;
+    max-width: 400px;
+    min-height: auto;
+    background-color: #c5e9bb;
+    padding: 30px;
+
+    .shoppingList-header {
+      @include flexCenter();
+      margin-bottom: 30px;
+
+      .fa-cart-shopping {
+        font-size: 20px;
+        margin-right: 14px;
+      }
+
+      p {
+        font-size: 26px;
+        font-weight: 500;
+      }
+
+      i {
+        font-size: 26px;
+        margin-right: 8px;
+      }
+    }
+
+    .ingredients-container {
+      width: 100%;
+      min-height: 400px;
+      max-height: 680px;
+      background-color: white;
+      border-radius: 8px;
+      overflow: scroll;
+      padding: 40px 60px;
+
+      ul {
+        line-height: 1.5em;
+        list-style: circle;
+      }
+
+      li {
+        font-size: 18px;
+        padding-bottom: 12px;
+      }
+    }
+  }
+
+  .meal-item {
+    height: auto;
+    @include flexCenter();
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: #f7f6f5;
+    filter: drop-shadow(1px 1px 2px rgb(190, 189, 189));
+  }
+
+  .meal-name {
+    width: 100%;
+    height: auto;
+    @include flexCenter();
+    flex-direction: column;
+    padding: 12px 20px;
+  }
+
+  #results-title {
+    margin-bottom: 50px;
+  }
+
+  .meal-img {
+    width: 100%;
+    height: 200px;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/*RECIPE DETAILS MODAL*/
+#recipeDetails-modal {
+  width: 50%;
+  max-width: 800px;
+  height: 900px;
+  @include flexCenter();
+  align-items: center;
+  flex-direction: column;
+  background-color: #f7f6f5;
+  position: fixed;
+  overflow: scroll;
+  border-radius: 10px;
+  z-index: 400;
+  padding: 45px;
+  top: 185px;
+  display: none;
+
+  .recipeDetails-content {
+    height: 100%;
+    width: 95%;
+    @include flexCenter();
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border: 3px solid #49b22b;
+    overflow-y: scroll;
+    margin: 25px 0;
+    padding: 0px;
+
+    .recipeDetails-div {
+      width: 100%;
+      @include flexCenter();
+      align-items: flex-start;
+      flex-direction: column;
+      padding: 40px;
+    }
+  }
+
+  .recipe-close-btn {
+    height: 35px;
+    width: 35px;
+    position: absolute;
+    font-size: 22px;
+    background-color: #f7f6f5;
+    color: grey;
+    border: none;
+    border-radius: 50%;
+    top: 25px;
+    right: 25px;
+
+    &:hover {
+      cursor: pointer;
+      color: black;
+    }
+  }
+
+  .recipe-header {
+    width: 100%;
+    @include flexCenter();
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 35px;
+
+    .recipe-title {
+      width: 50%;
+      font-size: 26px;
+      font-weight: 600;
+      margin-right: 20px;
+    }
+
+    .buttons {
+      @include flexCenter();
+      justify-content: flex-end;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      width: 300px;
+
+      .addSave-button,
+      .addMealplan-button {
+        cursor: pointer;
+        width: 130px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #49b22b;
+        background-color: white;
+        border: 1px solid #49b22b;
+        border-radius: 24px;
+        padding: 6px 18px;
+      }
+
+      .addMealplan-button {
+        margin-left: 15px;
+      }
+
+      .plusSave,
+      .plusMealplan {
+        display: inline;
+        padding-left: 5px;
+      }
+
+      .checkSave,
+      .checkMealplan {
+        display: none;
+      }
+
+      .saved {
+        background-color: #49b22b;
+        color: white;
+        transition: all 400ms ease;
+      }
+    }
+  }
+
+  .recipe-category {
+    display: inline-block;
+    background-color: #49b22b;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 0 10px;
+    margin: 6px 0;
+    margin-right: 10px;
+  }
+
+  .full-recipe-instructions {
+    margin-bottom: 30px;
+
+    ul {
+      list-style: circle;
+      margin-left: 34px;
+    }
+
+    li {
+      padding-bottom: 12px;
+    }
+  }
+
+  .recipe-details {
+    width: 100%;
+    display: flex;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+    .recipeDetails-subtitles {
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 18px 0;
+    }
+
+    .servings-title {
+      margin-right: 40px;
+    }
+  }
+
+  .ingredients-title,
+  .instructions-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  .description {
+    font-size: 16px;
+    margin-left: 22px;
+  }
+
+  .recipeImage-container {
+    width: 100%;
+    height: auto;
+    @include flexCenter();
+
+    img {
+      height: auto;
+      width: 95%;
+      object-fit: cover;
+    }
+  }
+}
+
+/*FOOTER*/
+footer {
+  @include flexCenter();
+  text-align: center;
+  font-size: 14px;
+  padding: 0 10px;
+  margin-top: 30px;
+}
+
+/*Desktop------------------------------------------------------------*/
+@media only screen and (min-width: 1200px) and (max-width: 1600px) {
+  .search-container {
+    #results-container {
+      #resultsGrid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 40px;
+      }
+    }
+  }
+
+  .saved-container {
+    .saved-recipes {
+      #savedGrid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 40px;
+      }
+    }
+  }
+
+  .mealplan-container {
+    .shoppingList-container {
+      max-width: 350px;
+    }
+    .cook-meals {
+      .mealplan-meals {
+        #mealplanGrid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        .meal-img {
+          width: 100%;
+          height: 150px;
+        }
+      }
+    }
+  }
+
+  #recipeDetails-modal {
+    .recipe-header {
+      .recipe-title {
+        width: 80%;
+      }
+
+      .buttons {
+        width: 150px;
+
+        .addSave-button {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
+
+/*Laptop------------------------------------------------------------*/
+@media only screen and (min-width: 769px) and (max-width: 1199px) {
+  .search-container {
+    .recipe-search-container {
+      input {
+        width: 400px;
+      }
+    }
+
+    #results-container {
+      #resultsGrid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+      }
+
+      .meal-img {
+        width: 100%;
+        height: 135px;
+      }
+    }
+  }
+
+  .saved-container {
+    .saved-recipes {
+      padding: 70px;
+
+      #savedGrid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+      }
+
+      .meal-img {
+        width: 100%;
+        height: 170px;
+      }
+    }
+  }
+
+  .mealplan-container {
+    padding: 60px;
+
+    .shoppingList-container {
+      max-width: 280px;
+
+      .shoppingList-header {
+        .fa-cart-shopping {
+          font-size: 20px;
+        }
+
+        p {
+          font-size: 24px;
+        }
+      }
+
+      .ingredients-container {
+        padding: 20px 40px;
+      }
+    }
+
+    .cook-meals {
+      margin-right: 40px;
+      .mealplan-meals {
+        #mealplanGrid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 20px;
+        }
+
+        .meal-img {
+          width: 100%;
+          height: 100px;
+        }
+      }
+    }
+  }
+
+  #recipeDetails-modal {
+    width: 80%;
+
+    .recipe-header {
+      .recipe-title {
+        width: 80%;
+      }
+
+      .buttons {
+        width: 150px;
+
+        .addSave-button {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
+
+/*iPad------------------------------------------------------------*/
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+  h2 {
+    font-size: 15px;
+  }
+
+  body {
+    margin: 40px 0 0 0;
+  }
+
+  header {
+    width: 80%;
+  }
+
+  .tabs {
+    height: 90px;
+    padding: 0 30px;
+
+    .tab {
+      margin: 0 5px;
+      padding: 0 15px;
+    }
+  }
+
+  .search-container {
+    height: auto;
+    min-height: 100vh;
+
+    .dark-overlay {
+      height: auto;
+      min-height: 100vh;
+    }
+    .recipe-search-container {
+      margin-top: 100px;
+      input {
+        width: 300px;
+      }
+
+      input {
+        font-size: 20px;
+
+        padding: 12px;
+      }
+
+      input::placeholder {
+        font-size: 20px;
+      }
+    }
+
+    #results-container {
+      height: auto;
+      padding: 30px;
+      overflow: visible;
+
+      #resultsGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+    }
+  }
+
+  .saved-container {
+    .saved-recipes {
+      padding: 50px;
+
+      #savedGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+      }
+
+      .meal-img {
+        width: 100%;
+        height: 170px;
+      }
+    }
+  }
+
+  .mealplan-container {
+    height: auto;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 50px;
+
+    .shoppingList-container {
+      width: 100%;
+      max-width: none;
+
+      .shoppingList-header {
+        .fa-cart-shopping {
+          font-size: 20px;
+        }
+
+        p {
+          font-size: 24px;
+        }
+      }
+
+      .ingredients-container {
+        overflow: visible;
+        max-height: none;
+        padding: 20px 40px;
+      }
+    }
+
+    .cook-meals {
+      width: 100%;
+      height: auto;
+      margin-right: 0px;
+      margin-bottom: 50px;
+
+      .mealplan-meals {
+        #mealplanGrid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 20px;
+        }
+
+        .meal-img {
+          width: 100%;
+          height: 130px;
+        }
+      }
+    }
+  }
+
+  #recipeDetails-modal {
+    width: 80%;
+    top: 70px;
+    padding: 25px;
+
+    .recipe-close-btn {
+      top: 12px;
+      right: 12px;
+    }
+
+    .recipe-header {
+      .recipe-title {
+        width: 80%;
+      }
+
+      .buttons {
+        width: 150px;
+
+        .addSave-button {
+          margin-bottom: 10px;
+        }
+      }
+    }
+    .recipeDetails-content {
+      .recipeDetails-div {
+        padding: 35px;
+      }
+    }
+  }
+
+  footer {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+/*iPhone------------------------------------------------------------*/
+@media only screen and (max-width: 480px) {
+  h1 {
+    font-size: 22px;
+  }
+
+  h2 {
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  body {
+    margin: 30px 0 0 0;
+  }
+
+  header {
+    width: 80%;
+  }
+
+  .tabs {
+    height: 85px;
+    justify-content: center;
+    padding: 0 30px;
+
+    .tab {
+      margin: 0 5px;
+      padding: 0 15px;
+    }
+
+    i {
+      font-size: 12px;
+      margin-right: 6px;
+    }
+  }
+
+  .search-container {
+    height: auto;
+    min-height: 100vh;
+
+    .dark-overlay {
+      height: auto;
+      min-height: 100vh;
+    }
+
+    .recipe-search-container {
+      margin-top: 50px;
+      input {
+        width: 200px;
+      }
+
+      input {
+        font-size: 18px;
+        padding: 10px;
+      }
+
+      input::placeholder {
+        font-size: 18px;
+      }
+    }
+
+    #results-container {
+      height: auto;
+      overflow: auto;
+      margin-top: 40px;
+      padding: 25px;
+
+      #resultsGrid {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;
+      }
+
+      .meal-img {
+        width: 100%;
+        height: 145px;
+      }
+    }
+  }
+
+  .saved-container {
+    height: auto;
+    .saved-recipes {
+      padding: 20px;
+
+      #savedGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .meal-img {
+        width: 100%;
+        height: 145px;
+      }
+    }
+  }
+
+  .mealplan-container {
+    height: auto;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 20px;
+
+    .shoppingList-container {
+      width: 100%;
+      max-width: none;
+      background-color: white;
+      padding: 0;
+
+      .shoppingList-header {
+        justify-content: flex-start;
+        width: 100%;
+        border-bottom: 1px solid #49b22b;
+        padding-bottom: 20px;
+        margin-bottom: 15px;
+
+        .fa-cart-shopping {
+          color: #49b22b;
+          font-size: 20px;
+        }
+
+        p {
+          font-size: 24px;
+        }
+      }
+
+      .ingredients-container {
+        overflow: visible;
+        max-height: none;
+        padding: 10px 20px;
+      }
+    }
+
+    .cook-meals {
+      width: 100%;
+      height: auto;
+      margin-right: 0px;
+      margin-bottom: 50px;
+
+      h6 {
+        font-size: 24px;
+      }
+      .mealplan-meals {
+        #mealplanGrid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 20px;
+        }
+
+        .meal-img {
+          width: 100%;
+          height: 130px;
+        }
+      }
+
+      .mealplan-stats {
+        h3 {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+
+  #recipeDetails-modal {
+    width: 90%;
+    height: 95%;
+    top: 20px;
+    padding: 25px;
+    overflow: scroll;
+
+    .recipe-close-btn {
+      top: 12px;
+      right: 12px;
+    }
+
+    .recipe-header {
+      flex-direction: column-reverse;
+      margin-bottom: 0;
+
+      .recipe-title {
+        width: 100%;
+        margin-top: 30px;
+        margin-bottom: 15px;
+      }
+
+      .buttons {
+        width: 100%;
+        justify-content: flex-start;
+
+        .addSave-button {
+          width: 100%;
+          margin-bottom: 10px;
+        }
+
+        .addMealplan-button {
+          width: 100%;
+          margin-left: 0;
+        }
+      }
+    }
+
+    .recipeDetails-content {
+      border: none;
+
+      .recipeDetails-div {
+        padding: 0px;
+      }
+    }
+
+    .recipe-details {
+      flex-direction: column;
+      padding: 15px 0;
+
+      .recipeDetails-subtitles {
+        padding: 0;
+      }
+
+      .servings-title {
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+    }
+
+    .description {
+      margin-left: 0;
+    }
+
+    .full-recipe-instructions ul {
+      margin-left: 20px;
+    }
+  }
+
+  footer {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+}

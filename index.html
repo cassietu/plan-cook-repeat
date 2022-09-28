@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+    name="description"
+    content="Meal planner with recipe search, save list, and shopping list"
+  />
+  <meta
+    name="keywords"
+    content="meal plan, meal planner, recipe search, save list, shopping list, cooking"
+  />
+  <meta name="author" content="Cassie Tu" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <title>Meal Planner: Plan, Cook, Repeat - Cassie Tu</title>
+  </head>
+
+  <body>
+    <div id="modal-background"></div>
+
+    <!--HEADER-->
+    <header><h1>Plan, Cook, Repeat</h1></header>
+
+    <!--TABS-->
+    <div class="tabs">
+      <div class="tab search-tab" style="background-color: #49b22b">
+          <i class="fas fa-search"></i>
+          <h2>Search Recipes</h2>
+        </div>
+     <div class="tab saved-tab">
+          <i class="fa-solid fa-heart"></i>
+          <h2>Saved</h2>
+        </div>
+    <div class="tab mealplan-tab">
+          <i class="fa-solid fa-calendar"></i>
+          <h2>Meal Plan</h2>
+        </div>
+    </div>
+
+    <!--SEARCH CONTAINER-->
+    <div class="search-container" aria-label="avocado toast background image">
+      <div class="dark-overlay">
+        <div class="recipe-search-container">
+          <div class="searchBox">
+            <input
+              type="text"
+              class="search-content"
+              placeholder="Search recipes"
+              id="search-input"
+            />
+
+            <button type="submit" class="search-btn btn" id="search-btn">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+
+        <div id="results-container">
+          <h3 id="results-title"></h3>
+          <div id="resultsGrid"></div>
+        </div>
+      </div>
+    </div>
+
+
+    <!--SAVED CONTAINER-->
+    <div class="saved-container">
+    <div class="saved-recipes">
+      <h3 id="emptyStateTextSaved">Add recipes from Search Recipes or Meal Plan</h3>
+      <div id="savedGrid"></div>
+    </div>
+  </div>
+
+    <!--MEALPLAN CONTAINER-->
+    <div class="mealplan-container">
+      <div class="cook-meals">
+        <div class="totalMeals-title"><h6><span class="total-meals"></span>to Cook</h6></div>
+        <div class="mealplan-meals">
+          <h3 id="emptyStateTextMealplan">Add recipes from Search Recipes or Saved</h3>
+          <div id="mealplanGrid"></div>
+        </div>
+        <div class="mealplan-stats">
+                    <div class="servings-container"><h3>Total Servings: <span class="total-servings">0 servings</span></h3></div>
+<div class="time-container"><h3>Total Cooking Time: <span class="total-time">0 minutes / 0 hours</span></h3></div>
+        </div>
+      </div>
+
+      <div class="shoppingList-container">
+        <div class="shoppingList-header">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <p>Shopping List</p>
+        </div>
+        <div class="ingredients-container">
+          <ul class="ingredientsList"></ul>
+        </div>
+      </div>
+    </div>
+
+        <!--RECIPE DETAILS MODAL-->
+<div id="recipeDetails-modal">
+          <button
+            type="button"
+            class="btn recipe-close-btn"
+            id="recipe-close-btn"
+          >
+            <i class="fas fa-times"></i>
+          </button>
+
+          <div class="recipeDetails-content">
+            <div class="recipeDetails-div">
+              <div class="recipe-header">
+                <div class="recipe-title">Title</div>
+
+                <div class="buttons">
+                <button class="addSave-button">
+                  Save <i class="fa-solid fa-plus plusSave"></i>
+                  <i class="fa-solid fa-check checkSave"></i>
+                </button>
+
+                <button class="addMealplan-button">
+                  Meal Plan <i class="fa-solid fa-plus plusMealplan"></i>
+                  <i class="fa-solid fa-check checkMealplan"></i>
+                </button>
+              </div>
+                
+              </div>
+
+              <div class="recipe-categories"></div>
+
+              <div class="recipe-details">
+                <div class="recipeDetails-subtitles servings-title">
+                  Servings: <span class="recipe-servings">servings</span>
+                </div>
+                <div class="recipeDetails-subtitles">
+                  Ready in: <span class="recipe-minutes">minutes</span>
+                </div>
+              </div>
+
+              <div class="full-recipe-instructions">
+                <h5 class="ingredients-title">Ingredients</h5>
+                <p class="description">
+                  <ul class="ingredient-list"></ul>
+                </p>
+
+                <h5 class="instructions-title">Instructions</h5>
+                <p class="instructions description">Instructions</p>
+              </div>
+
+              <div class="recipeImage-container">
+                <img class="recipe-img" src="" alt="recipe image" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+            <!--FOOTER-->
+    <footer class="footer">
+      <p>Copyright 2022. Designed & built by Cassie Tu</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
