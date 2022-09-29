@@ -922,9 +922,6 @@ footer {
     width: 100%;
     height: 145px;
   }
-  .saved-container {
-    height: auto;
-  }
   .saved-container .saved-recipes {
     padding: 20px;
   }
